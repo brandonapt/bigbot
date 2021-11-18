@@ -1,0 +1,14 @@
+const { MessageEmbed } = require('discord.js');
+const allowedRanks = process.env.AllowedRanks.split(",");
+const noblox = require('noblox.js')
+const discord = require('discord.js')
+module.exports = {
+	name: '',
+	category: '',
+	description: '',
+	timeout: 1000,
+  rolesRequired: [],
+	run: async (client, message, args) => {
+
+	},
+};
