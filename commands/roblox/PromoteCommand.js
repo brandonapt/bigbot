@@ -1,6 +1,5 @@
 const roblox = require('noblox.js');
 const chalk = require('chalk');
-const allowedRanks = process.env.AllowedRanks.split(",");
 require('dotenv').config();
 const Discord = require('discord.js')
 
@@ -26,11 +25,24 @@ async function getRankFromName(func_rankname, func_group){
 module.exports = {
 	name: 'promote',
 	category: 'roblox',
-  rolesRequired: allowedRanks,
+  rolesRequired: [],
   usage: '<username>',
 	description: 'promote someone',
 	timeout: 1000,
+
 	run: async (client, message, args) => {
+      const allowedRanks = process.env.AllowedRanks.split(",");
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
             let embed = new Discord.MessageEmbed();
 
         let username = args[0];

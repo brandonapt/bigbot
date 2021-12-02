@@ -18,7 +18,14 @@ module.exports = {
 	timeout: 1000,
 	run: async (client, message, args) => {
 
+const allowedRanks = process.env.AllowedRanks.split(",");
 
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
 
 
     let strArgs = args.join(" ");
@@ -45,7 +52,7 @@ module.exports = {
 
     client.request = newRequest;
 
-    message.channel.send(client.embed( "Sent Request", `I have successfully sent the request over for Roblox to read! If there is no response, it's most likely that there are no games running!`));
+    message.channel.send(client.embed( "Waiting for Server...", `Waiting for the game server to send back what I requested...`));
 
   
 },

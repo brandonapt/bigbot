@@ -2,15 +2,15 @@ const Discord = require('discord.js');
 const fetch = require('node-fetch');
 
 let config = {
-    groupId: '8360459',
-    groupIconURL: 'https://t3.rbxcdn.com/adb50b087bf29a1284f50b047b0e87cc',
-    webhookId: '887805680558424134',
-    webhookToken: 'zX3xSfoL6AXUD5q-KKbh9A44PMLthlCk1v4J2TV-A-pVMsQrk7jhtsxgi1vd9lqY0IBQ'
+    groupId: '5440059',
+    groupIconURL: 'https://t6.rbxcdn.com/f758f34e809b0f1e9eab9c5ab921851e',
+    webhookId: '911051941377871904',
+    webhookToken: 'h5tVXabsfT8IpTdm9LFGuLHq9pJrFXOzyMK0u4beBBQUDbkOL5Fd1MPTzMcPt2OT-qKk'
 }
 
 let client = new Discord.WebhookClient(config.webhookId, config.webhookToken);
 
-let milestones = ['100'];
+let milestones = ['300'];
 let currentCount = 0;
 let firstCheck = true;
 

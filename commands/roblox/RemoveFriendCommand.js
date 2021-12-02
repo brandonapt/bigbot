@@ -10,6 +10,17 @@ module.exports = {
 	timeout: 1000,
   rolesRequired: allowedRanks,
 	run: async (client, message, args) => {
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
     if (!args[0]) {
       client.errorEmbed.setDescription('Please provide a username!')
      return message.reply(client.errorEmbed)

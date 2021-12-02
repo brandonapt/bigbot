@@ -3,11 +3,16 @@ const db2 = require('quick.db')
 const Timeout = new Set();
 const ms = require('ms');
 const Discord = require('discord.js')
+const {
+    toUnicode
+} = require('punycode')
 
 module.exports = async (client, message) => {
 
 	if (message.author.bot) return
 	if (!message.content.toLowerCase().startsWith(client.prefix)) return
+
+  
 
 	if (!message.member) {
 		message.member = await message.guild.fetchMember(message);
@@ -83,7 +88,11 @@ module.exports = async (client, message) => {
         }
     //console.log(rolesData)
               //console.log(timeoutThing)
+              try {
 			command.run(client, message, args);
+              } catch (e) {
+
+              }
 			Timeout.add(`${message.author.id}${command.name}`);
 			setTimeout(() => {
 				Timeout.delete(`${message.author.id}${command.name}`);
@@ -100,7 +109,11 @@ module.exports = async (client, message) => {
             return message.channel.send(embed2);
       }
           }
-			command.run(client, message, args);
+          try {
+			command.run(client, message, args); 
+          } catch (e) {
+            
+          }
 		}
 	
 };

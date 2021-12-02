@@ -6,6 +6,18 @@ module.exports = {
 	name: 'slowmode',
   rolesRequired: ['Moderation Permissions'],
 	run: async (client, message, args) => {
+    const allowedRanks = process.env.AllowedRanks.split(",");
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
 		if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.channel.send(client.embed('Whoops!', 'You need the ```MANAGE_CHANNELS``` permission to do this!')).then((m) => m.delete({ timeout: 5000 }));
 
 		if (!args[0]) {

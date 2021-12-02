@@ -6,6 +6,18 @@ module.exports = {
 	category: 'moderation',
   usage: '<username> (reason)',
 	run: async (client, message, args) => {
+const allowedRanks = process.env.AllowedRanks.split(",");
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
 		if (!message.member.hasPermission('BAN_MEMBERS')) {
       var embed1 = client.embed('Woah, There!', "You need the ```BAN_MEMBERS``` permission to use this command")
 			return message.channel.send(embed1);

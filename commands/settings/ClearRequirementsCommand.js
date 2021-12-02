@@ -8,9 +8,20 @@ module.exports = {
 	category: 'settings',
 	description: 'this command clears requirements for command',
 	timeout: 1000,
-  rolesRequired: allowedRanks,
+  rolesRequired: [],
   usage: '<command>',
 	run: async (client, message, args) => {
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
     if (!args[0]) {
       return message.reply('Provide a command.')
     }

@@ -4,7 +4,6 @@ const ms = require('ms');
 
 require('dotenv').config();
 
-const allowedRanks = process.env.AllowedRanks.split(",");
 module.exports = {
 	name: 'closerequest',
 	category: 'game',
@@ -13,6 +12,7 @@ module.exports = {
 	description: 'closes a api request',
 	timeout: 1000,
 	run: async (client, message, args) => {
+const allowedRanks = process.env.AllowedRanks.split(",");
 
     let isAllowed = false;
     for(let i = 0; i < allowedRanks.length; i++) {

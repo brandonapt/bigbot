@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const allowedRanks = process.env.AllowedRanks.split(",");
 const noblox = require('noblox.js')
 const discord = require('discord.js')
 module.exports = {
@@ -8,8 +7,20 @@ module.exports = {
 	description: 'gets roblox friends',
 	timeout: 1000,
   usage: '',
-  rolesRequired: allowedRanks,
+  rolesRequired: [],
 	run: async (client, message, args) => {
+    const allowedRanks = process.env.AllowedRanks.split(",");
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
     let friends
     const account = await noblox.getCurrentUser()
     try {

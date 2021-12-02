@@ -1,7 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const roblox = require('noblox.js');
 const Discord = require('discord.js');
-const allowedRanks = process.env.AllowedRanks.split(",");
 const path = require('path');
 require('dotenv').config();
 
@@ -18,11 +17,23 @@ let getRankFromName = async (func_rankname, func_group) => {
 module.exports = {
 	name: 'setrank',
 	category: 'roblox',
-    rolesRequired: allowedRanks,
+    rolesRequired: [],
     usage: '<username> <rank>',
 	description: 'change someones rank',
 	timeout: 1000,
 	run: async (client, message, args) => {
+    const allowedRanks = process.env.AllowedRanks.split(",");
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
 let embed = new Discord.MessageEmbed();
 
         let username = args[0];

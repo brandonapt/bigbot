@@ -5,7 +5,18 @@ module.exports = {
   rolesRequired: ['Moderation Permissions'],
   usage: '<username || userID> <roleID || role ping>',
 	run: async (client, message, args) => {
-		message.delete();
+		const allowedRanks = process.env.AllowedRanks.split(",");
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
 
 		if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(client.embed('Whoops!', "You need the ```MANAGE_ROLES``` permission to do that!")).then((m) => m.delete({ timeout: 5000 }));
 

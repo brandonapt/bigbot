@@ -5,6 +5,18 @@ module.exports = {
   usage: '<mention>',
   rolesRequired: ['Moderation Permissions'],
 	run: async (client, message, args) => {
+    const allowedRanks = process.env.AllowedRanks.split(",");
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
 		if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send(client.embed('Woah, There!', "You need the ```BAN_MEMBERS``` permission to use this command")).then((m) => m.delete({ timeout: 5000 }));
 
 		if (!args[0]) return message.channel.send(client.embed('Woah, There!', "You need to mention someone to unban!")).then((m) => m.delete({ timeout: 5000 }));

@@ -1,17 +1,28 @@
 const { MessageEmbed } = require('discord.js');
 const roblox = require('noblox.js');
-const allowedRanks = process.env.AllowedRanks.split(",");
 const Discord = require('discord.js');
 const path = require('path');
 require('dotenv').config();
 module.exports = {
 	name: 'shout',
 	category: 'roblox',
-  rolesRequired: allowedRanks,
+  rolesRequired: [],
   usage: '<shout>',
 	description: 'shout something ig',
 	timeout: 1000,
 	run: async (client, message, args) => {
+    const allowedRanks = process.env.AllowedRanks.split(",");
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
     let embed = new Discord.MessageEmbed();
 
         let msg = args.join(' ');

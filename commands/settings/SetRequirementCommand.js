@@ -8,9 +8,21 @@ module.exports = {
 	category: 'settings',
 	description: 'adds a requirement to a cmd',
 	timeout: 1000,
-  rolesRequired: allowedRanks,
+  rolesRequired: [],
   usage: '<command> <role mention>',
 	run: async (client, message, args) => {
+    const allowedRanks = process.env.AllowedRanks.split(",");
+
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
               let mention = message.mentions.roles.first();
     if (!args[0]) {
       client.errorEmbed.setDescription('Please provide a command to add a role for.')

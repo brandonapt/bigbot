@@ -16,7 +16,14 @@ module.exports = {
         return message.channel.send(client.embed( "In Use", `Someone already has a request activated! Please wait for this request to expire. If the Roblox servers are down, make this request expire using the force command`));
     }
 
+const allowedRanks = process.env.AllowedRanks.split(",");
 
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
 
     let username = args[0];
     if(!username) {

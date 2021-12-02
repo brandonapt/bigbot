@@ -16,7 +16,18 @@ let req = client.request;
         return message.channel.send(client.embed( "In Use", `Someone already has a request activated! Please wait for this request to expire. If the Roblox servers are down, make this request expire using the force command`));
     }
 
+const allowedRanks = process.env.AllowedRanks.split(",");
 
+    let isAllowed = false;
+    for(let i = 0; i < allowedRanks.length; i++) {
+        if(message.member.roles.cache.some(role => [allowedRanks[i]].includes(role.name))) {
+            isAllowed = true;
+        }
+    }
+
+    if(isAllowed == false) {
+        return message.channel.send(client.embed("No Permission", "You don't have permission to run this command"));
+    }
 
     let type = args[0];
     if(!type) {
@@ -41,10 +52,7 @@ let req = client.request;
 
         message.channel.send(client.embed( "Sent Request", `I have successfully sent the request over for Roblox to read! If there is no response, it's most likely that the server is down`));
 
-        let timeString = `${process.env.cooldown}s`;
-        setTimeout(() => {
-            unlockCoolDowns.delete(message.author.id);
-        }, ms(timeString));
+
     } else {
 
         let jobID = args[1];

@@ -2,7 +2,10 @@ const express = require('express');
 const app = express();
 const Stats  = require('discord-live-stats');
 const roblox = require('noblox.js')
+const discord = require('discord.js')
 require('dotenv').config()
+const db = require('block.db')
+const fetch = require('node-fetch')
 const rankUtils = require('../roblox/rankUtils')
 //const client = require('./index')
 
@@ -15,6 +18,52 @@ app.get('/', async (request, response) => {
      response.send('welcome to da api');
 });
 app.use(express.json())
+
+
+app.get('/', async (request, response) => {
+     response.send('welcome to da api');
+});
+
+
+app.get('/getMute', async (req, res) => {
+  if (!req.query.id) return res.sendStatus(401)
+
+  const id = req.query.id
+  let muted = await db.get(`${id}_muted`)
+  if (muted == null) {
+    db.set(`${id}_muted`, true)
+  }
+  muted = await db.get(`${id}_muted`)
+  res.json({"muted": muted});
+})
+
+app.get('/setMute', async (req, res) => {
+  if (!req.query.id || !req.query.muted) return res.sendStatus(401)
+
+  const id = req.query.id
+  const muted = req.query.muted
+
+    db.set(`${id}_muted`, muted)
+
+  res.json({"status": 'done'});
+})
+
+app.get('/callMod',async (req, res) => {
+  if (!req.query.user || !req.query.reason) {
+    //console.log(req.body.user)
+    //console.log(req.body.reason)
+    return res.sendStatus(401)
+  }
+  const channel = client.channels.cache.get('911687628171145316')
+  const embed = new discord.MessageEmbed()
+    .setTitle('New Moderator Call From ' + req.query.user)
+    .setColor("RANDOM")
+    .setTimestamp()
+    .setDescription(`${req.query.reason}`)
+
+  channel.send(embed)
+  res.send('done')
+}) 
 app.post('/setrank', async (req, res) => {
     if (req.body.key !== process.env.key) return res.sendStatus(401);
     if (!req.body.user || !req.body.rank || !req.body.author) return res.sendStatus(400);
@@ -65,6 +114,10 @@ app.post('/setrank', async (req, res) => {
         })
     });
 });
+app.post('/getUsers', async (request, response) => {
+     response.send('welcome to da api');
+});
+
 
 app.post('/promote', async (req, res) => {
     if (req.body.key !== process.env.key) return res.sendStatus(401);
@@ -259,8 +312,9 @@ app.post(`/verify-request`, async (request, response) => {
             embed.addField("Ban Information", `**Moderator**: ${request.headers.moderator}\n**Reason**: ${request.headers.reason}`);
             channel.send(embed);
         } else {
-            channel.send(`<@${commandRequest.authorID}>`);
-            channel.send(client.embed("Success", message));
+            channel.send(`<@${commandRequest.authorID}>,`);
+                    let string = message.replace(/--/g, '\n')
+            channel.send(client.embed("Success", string));
         }
     } else {
         channel.send(`<@${commandRequest.authorID}>`);

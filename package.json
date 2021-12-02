@@ -14,6 +14,7 @@
   "dependencies": {
     "@androz2091/discord-invites-tracker": "^0.1.2",
     "@discordjs/opus": "^0.6.0",
+    "@slicybt5w/djs-anti-raid": "^1.0.3",
     "ascii-table": "0.0.9",
     "axios": "^0.19.2",
     "block.db": "^1.1.1",

@@ -51,6 +51,6 @@ module.exports = {
 
      client.request = newRequest;
 
-    message.channel.send(client.embedMaker("Sent Request", `I have successfully sent the request over for Roblox to read! If there is no response, it's most likely that the server is down`));
+    message.channel.send(client.embed( "Waiting for Server...", `Waiting for the game server to send back what I requested...`));
 	},
 };

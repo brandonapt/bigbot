@@ -6,7 +6,7 @@ module.exports = {
 	name: 'whois',
 	category: 'roblox',
   usage: '<username>',
-    rolesRequired: allowedRanks,
+    rolesRequired: [],
 	description: 'gets the info of a user',
 	timeout: 1000,
 	run: async (client, message, args) => {

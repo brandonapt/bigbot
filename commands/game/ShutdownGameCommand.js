@@ -57,7 +57,7 @@ let req = client.request;
 
         client.request = newRequest;
 
-        message.channel.send(client.embed( "Sent Request", `I have successfully sent the request over for Roblox to read! If there is no response, it's most likely that the server is down`));
+       return message.channel.send(client.embed( "Sent Request", `I have successfully sent the request over for Roblox to read! If there is no response, it's most likely that the server is down`));
     }
 
 
@@ -84,7 +84,7 @@ let req = client.request;
 
         client.request = newRequest;
 
-        message.channel.send(client.embed("Sent Request", `I have successfully sent the request over for Roblox to read! If there is no response, it's most likely that the server is down or the job ID that you supplied isn't valid`));
+     message.channel.send(client.embed( "Waiting for Server...", `Waiting for the game server to send back what I requested...`));
 	
   },
 };
