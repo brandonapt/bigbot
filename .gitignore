@@ -4,3 +4,4 @@ node_modules
 .idea
 json.sqlite
 blockdb.sqlite
+.replit
