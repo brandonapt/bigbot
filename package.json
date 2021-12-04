@@ -1,12 +1,12 @@
 {
-  "name": "discordjsbottemplate",
+  "name": "bigbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "a very big bot",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "server": "nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +16,7 @@
     "@discordjs/opus": "^0.6.0",
     "@slicybt5w/djs-anti-raid": "^1.0.3",
     "ascii-table": "0.0.9",
-    "axios": "^0.19.2",
+    "axios": "^0.24.0",
     "block.db": "^1.1.1",
     "chalk": "^4.1.2",
     "common-tags": "^1.8.0",
