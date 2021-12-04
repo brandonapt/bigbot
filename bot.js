@@ -55,7 +55,7 @@ const antiRaid = new AntiRaid(client, {
 
 
 antiRaid.on("trying", (member, event, punishType) => {
-    console.log(`I will trying do ${punishType} to stop ${member.user.tag} for ${event}`);
+    console.log(`[ANTI] I will try to ${punishType} to stop ${member.user.tag} for ${event}`);
 });
 
 antiRaid.on("action", (member, type) => {

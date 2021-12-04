@@ -13,5 +13,5 @@ https://www.digitalocean.com/
 
 Credits:  
 In-Game-Ranking Commands: https://github.com/yogurtsyum/in-game-ranking  
-Game-To-Discord Commands: https://github.com/zachariapopcorn/discord-roblox-moderation-bot  
-Command System (the base): https://github.com/LengoLabs/qbot
+(Most) Game-To-Discord Commands: https://github.com/zachariapopcorn/discord-roblox-moderation-bot  
+Help Command System (the base): https://github.com/LengoLabs/qbot
