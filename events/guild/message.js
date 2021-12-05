@@ -8,7 +8,6 @@ const {
 } = require('punycode')
 
 module.exports = async (client, message) => {
-
 	if (message.author.bot) return
 	if (!message.content.toLowerCase().startsWith(client.prefix)) return
 
@@ -17,7 +16,6 @@ module.exports = async (client, message) => {
 	if (!message.member) {
 		message.member = await message.guild.fetchMember(message);
 	}
-
 	if (!message.guild) return;
 
     const args = message.content.slice(client.prefix.length).split(" ");
@@ -33,6 +31,7 @@ module.exports = async (client, message) => {
   }
 
 	if (!command) command = client.commands.get(client.aliases.get(cmd));
+
 
 
 
