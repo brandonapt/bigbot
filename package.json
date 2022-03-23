@@ -25,7 +25,6 @@
     "discord-buttons": "^4.0.0",
     "discord-easy-dashboard": "^1.0.0",
     "discord-giveaways": "^4.2.1",
-    "discord-live-stats": "git+https://github.com/brandoge91/Discord-Live-Stats.git",
     "discord-player": "^5.1.0",
     "discord-temp-channels": "^3.0.1",
     "discord.js": "^12.2.0",

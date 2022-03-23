@@ -3,7 +3,6 @@ const Discord = require('discord.js')
 const { Client, Collection } = require('discord.js');
 const fs = require('fs');
 const discord = require('discord.js')
-const Stats  = require('discord-live-stats');
 const { BOT_TOKEN, PREFIX } = process.env;
 
 const client = new Client({ disableEveryone: true });
