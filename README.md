@@ -4,6 +4,9 @@ BigBot is a open-source hodge-podge of open source bots and services here on Git
 Setup Guide:  
 N/A (soon)
 
+We now have a discord!
+https://discord.gg/beC2cddaFq
+Come on down, we'd love to chat or give support!
     
 Hosting Options:  
 https://replit.com  
